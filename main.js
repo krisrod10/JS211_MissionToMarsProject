@@ -2,7 +2,7 @@
 const assert = require('assert');
 
 // This is an object that has types of jobs and the values each provide.
-const jobTypes = {
+let jobTypes = {
   pilot: 'MAV',
   mechanic: 'Repair Ship',
   commander: 'Main Ship',
@@ -11,11 +11,74 @@ const jobTypes = {
 
 // Your code will go here
 
+class CrewMember  {
+// Properties:
+// name - name of the crewMember 
+//title - title of the crewMember 
+//assignedVehicle -  the vehicle assigned to each crew member 
+
+
+//assignTo(Ship) - assign this crewMember to the vehicle passed in, 
+//               - and update the vehicle's listof assigned crewMembers
+name; // name of crewMember
+title; // title of crewMemeber
+specialSkill; //special skill of crewMember
+
+constructor(iName){
+  this.name = iName;
+  this.title = [];
+  this.specialSkill = null;
+} 
+/**
+ * sign up the crewMember for the ship passed in
+ * @param {*} toSignUpFor the ship up the crewMember for
+ */
+signUp(toSignUpFor){
+  
+  toSignUpFor.title.push(this)
+  this.jobtype.push(job);
+}
+
+}
 
 
 
 
+class Ship {
+// Properties:
+//name/identifier - unique indetifier for the ship
+// type - type of the vehicle 
+//crewAssigned - an array of crew members asigned to the vehcile
 
+// canGo -- return true , if the vehicle is allowed to be operated, based on the type of vehicle
+//          the current list of assigned crew
+name;// name of ship
+jobtype; // type of job
+crewAssigned; //crewMember assigned to vehicle
+constructor(iName){
+  this.name = iName;
+  this.jobtype = jobTypes;
+  this.crewAssigned = null;
+  }
+
+  markCrewAssigned(theShip){
+    this.crewAssigned = theShip;
+  }
+}
+
+
+let r = new CrewMember("Rick Martinez");
+
+let w = new ship("chemistry");
+let x = new ship("Ascend into lower orbit");
+
+r.job(w);
+r.job(x);
+
+
+r.markCrewAssigned(x);
+
+console.log(r);
 
 // Begin by reading the tests and building a function that will full each one.
 // As you build, you might not have to build them in order, maybe you do...
