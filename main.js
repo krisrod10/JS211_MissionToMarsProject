@@ -21,22 +21,21 @@ class CrewMember  {
 //assignTo(Ship) - assign this crewMember to the vehicle passed in, 
 //               - and update the vehicle's listof assigned crewMembers
 name; // name of crewMember
-title; // title of crewMemeber
+job
 specialSkill; //special skill of crewMember
+ship;
 
-constructor(iName){
+constructor(iName,iJob, iSpecialSkill){
   this.name = iName;
-  this.title = [];
-  this.specialSkill = null;
+  this.job = iJob; 
+  this.specialSkill = iSpecialSkill;
+  this.ship = null;
 } 
-/**
- * sign up the crewMember for the ship passed in
- * @param {*} toSignUpFor the ship up the crewMember for
- */
-signUp(toSignUpFor){
+
+enterShip(theShip){
   
-  toSignUpFor.title.push(this)
-  this.jobtype.push(job);
+  theShip.crew.push(this)
+ this.ship = theShip; 
 }
 
 }
@@ -53,32 +52,45 @@ class Ship {
 // canGo -- return true , if the vehicle is allowed to be operated, based on the type of vehicle
 //          the current list of assigned crew
 name;// name of ship
-jobtype; // type of job
-crewAssigned; //crewMember assigned to vehicle
-constructor(iName){
-  this.name = iName;
-  this.jobtype = jobTypes;
-  this.crewAssigned = null;
+type; 
+ability;
+ //crewMember assigned to vehicle
+ crew; 
+constructor(iName, iType, iAbility){
+  this.name = iName; 
+  this.type = iType;
+  this.ability = iAbility;
+  this.crew = [];
+
   }
 
-  markCrewAssigned(theShip){
-    this.crewAssigned = theShip;
+  markCrewAssigned(theCrewMember){
+    this.crew.push(this)
+    this.ability.push(theCrewMember);
+  }
+  missionStatement(){
+    if(this.crew.length > 0){
+      return this.ability;
+    }else {
+      return "Can't perform a mission yet."
+    }
   }
 }
 
 
-let r = new CrewMember("Rick Martinez");
-
-let w = new ship("chemistry");
-let x = new ship("Ascend into lower orbit");
-
-r.job(w);
-r.job(x);
+let r = new CrewMember("Rick Martinez", "Pilot", "chemistry");
+ 
+let w = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit');
 
 
-r.markCrewAssigned(x);
+r.enterShip(w)
 
-console.log(r);
+
+
+
+
+
+console.log(w);
 
 // Begin by reading the tests and building a function that will full each one.
 // As you build, you might not have to build them in order, maybe you do...
